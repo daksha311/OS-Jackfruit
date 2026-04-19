@@ -119,7 +119,7 @@ Output of `engine ps` showing both containers tracked by the supervisor with the
 Terminal 1 shows the supervisor printing `[Producer] Added: hello-from-container` and `[Consumer] Wrote: hello-from-container` messages, demonstrating the producer and consumer threads operating on the shared bounded buffer. Terminal 2 shows `cat alpha.log` confirming container output was persisted to disk through the pipeline.
 
 ### Screenshot 4 — CLI and IPC (UNIX Domain Socket)
-![Screenshot 4](screenshots/screenshot4.png)
+![Screenshot 4](screenshots/screenshot4_3.png)
 
 The `engine start` and `engine ps` commands are issued from a CLI client process. Each command connects to the supervisor over a UNIX domain socket at `/tmp/mini_runtime.sock`, sends a command string, receives a response, and exits.
 
@@ -129,7 +129,7 @@ The `engine start` and `engine ps` commands are issued from a CLI client process
 `dmesg` output showing the kernel module logging a soft-limit warning event (`soft limit exceeded PID=11884 RSS=...`) when the monitored container process first exceeds its configured soft memory limit without terminating the process.
 
 ### Screenshot 6 — Hard-Limit Enforcement
-![Screenshot 6](screenshots/screenshot4_3.png)
+![Screenshot 6](screenshots/screenshot4.png)
 
 `dmesg` output showing the kernel module sending SIGKILL to the container process (`killing PID=11884 RSS=...`) after it exceeds the hard memory limit. `engine ps` confirms the container shows as STOPPED.
 
