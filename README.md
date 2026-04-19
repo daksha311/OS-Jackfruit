@@ -115,7 +115,7 @@ Output of `engine ps` showing both containers tracked by the supervisor with the
 
 ### Screenshot 3 — Bounded-Buffer Logging Pipeline
 ![Screenshot 3](screenshots/screenshot3.png)
-
+![Screenshot 3](screenshots/screenshot3-t2.png)
 Terminal 1 shows the supervisor printing `[Producer] Added: hello-from-container` and `[Consumer] Wrote: hello-from-container` messages, demonstrating the producer and consumer threads operating on the shared bounded buffer. Terminal 2 shows `cat alpha.log` confirming container output was persisted to disk through the pipeline.
 
 ### Screenshot 4 — CLI and IPC (UNIX Domain Socket)
@@ -124,22 +124,22 @@ Terminal 1 shows the supervisor printing `[Producer] Added: hello-from-container
 The `engine start` and `engine ps` commands are issued from a CLI client process. Each command connects to the supervisor over a UNIX domain socket at `/tmp/mini_runtime.sock`, sends a command string, receives a response, and exits.
 
 ### Screenshot 5 — Soft-Limit Warning
-![Screenshot 5](screenshots/screenshot5.png)
+![Screenshot 5](screenshots/screenshot4-softlimitwarning.png)
 
 `dmesg` output showing the kernel module logging a soft-limit warning event (`soft limit exceeded PID=11884 RSS=...`) when the monitored container process first exceeds its configured soft memory limit without terminating the process.
 
 ### Screenshot 6 — Hard-Limit Enforcement
-![Screenshot 6](screenshots/screenshot6.png)
+![Screenshot 6](screenshots/screenshot4_3.png)
 
 `dmesg` output showing the kernel module sending SIGKILL to the container process (`killing PID=11884 RSS=...`) after it exceeds the hard memory limit. `engine ps` confirms the container shows as STOPPED.
 
 ### Screenshot 7 — Scheduling Experiment
-![Screenshot 7](screenshots/screenshot7.png)
+![Screenshot 7](screenshots/screenshot5.png)
 
 `top` output showing two cpu_hog processes running concurrently. The process with NI=0 receives a larger CPU share compared to the process with NI=10, demonstrating CFS priority weighting.
 
 ### Screenshot 8 — Clean Teardown
-![Screenshot 8](screenshots/screenshot8.png)
+![Screenshot 8](screenshots/screenshot6.png)
 
 `ps aux | grep defunct` returns no zombie processes after shutdown. `dmesg` confirms the kernel module unloaded cleanly with all logging threads exited and joined.
 
