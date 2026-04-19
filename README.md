@@ -94,7 +94,8 @@ sudo ./engine start low  /home/$(whoami)/OS-Jackfruit/rootfs-beta  "while true; 
 sudo ./engine stop alpha
 sudo ./engine stop beta
 ps aux | grep defunct
-dmesg | tail -30
+ps -ef | grep engine
+sudo dmesg | grep monitor
 sudo rmmod monitor
 ```
 
